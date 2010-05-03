@@ -1,4 +1,12 @@
 class NodesController < ApplicationController
+
+  MAX_NODES_IN_LIST = 25
+
+  def home
+    @nodes = Node.find( :all, :order => 'updated_at DESC', :limit => MAX_NODES_IN_LIST )
+    @node = Node.new
+  end
+
   def show
     key = params[ :key ].join( '/' )
     @node = Node.find_by_key( key )
@@ -9,16 +17,12 @@ class NodesController < ApplicationController
     end
   end
 
-  def new
-    @nodes = Node.all.reverse
-    @node = Node.new
-  end
-
   def create
     @node = Node.new(params[:node])
     if @node.save
       redirect_to node_path( @node )
-    else
+    else           
+      @nodes = []
       render :action => "new" 
     end
   end

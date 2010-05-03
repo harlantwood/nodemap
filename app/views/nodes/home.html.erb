@@ -1,4 +1,4 @@
-<h2>New Node</h2>
+<h2>Create New Node:</h2>
 
 <% form_for(@node, :url => { :action => "create" }) do |f| %>
   <%= f.error_messages %>
@@ -18,7 +18,7 @@
                                  
 <hr />                                 
                                  
-<h2>Recent Nodes</h2>
+<h2>Recent Nodes:</h2>
                                  
 <% @nodes.each do |node| %>
   <div><%= link_to node.key, node %></div>
