@@ -1,10 +1,11 @@
 class NodesController < ApplicationController
   def show
-    @node = Node.find_by_key( params[ :key ] )
+    key = params[ :key ].join( '/' )
+    @node = Node.find_by_key( key )
     if @node
       render :layout => false
     else
-      flash.now[ :error ] = "Can't find the key: #{ params[ :key ] }"
+      render :text => "Can't find the key: #{ key }", :status => '404 Not Found'
     end
   end
 
@@ -16,7 +17,7 @@ class NodesController < ApplicationController
   def create
     @node = Node.new(params[:node])
     if @node.save
-      redirect_to( "/#{@node.key}" ) 
+      redirect_to node_path( @node )
     else
       render :action => "new" 
     end
