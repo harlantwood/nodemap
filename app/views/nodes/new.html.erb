@@ -16,3 +16,9 @@
   </p>
 <% end %>
                                  
+                                 
+Recent Nodes:                                 
+<% @nodes.each do |node| %>
+  <div><%= link_to node.key, node %></div>
+<% end %>
+                                 
