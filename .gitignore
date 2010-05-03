@@ -1,0 +1,7 @@
+.DS_Store
+.idea
+config/database.yml
+db/backup
+db/*.sqlite3
+log/*
+tmp/*
