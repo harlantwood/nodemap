@@ -1,16 +1,40 @@
-<h2>Create New Node:</h2>
+<br />                                 
+<h2>Enter HTML to create new node:</h2>
 
 <% form_for(@node, :url => { :action => "create" }) do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label :html %><br />
-    <%= f.text_area :html %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+  <div>
+    <%= f.text_area :html, :cols => 100 %>
+  </div>
+  <div rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">      
+    <table style="margin: 0em; padding: 0em; font-size: 90%; text-align: left">
+      <tr>
+        <td>
+          <i>
+            I agree that others are free to copy, share, modify, and remix this work, 
+            for free or for profit,
+            on the condition that they attribute this page as a source, 
+            and share any copies and remixes under the same 
+            <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative 
+              Commons licence</a>.  
+          </i> 
+        </td>
+        <td>
+          <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/"><img 
+            alt="Creative Commons License" style="border-width:0" align="left"
+            src="http://creativecommons.org/images/public/somerights20.png" /></a> 
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <%= f.submit 'Yes! Create This Free IP!' %>
+  </div>
 <% end %>
                                  
+<br />                                 
+<hr />                                 
+<hr />                                 
 <hr />                                 
                                  
 <h2>Recent Nodes:</h2>
@@ -18,4 +42,9 @@
 <% @nodes.each do |node| %>
   <div><%= link_to node.key, node %></div>
 <% end %>
+                                 
+<br />                                 
+<hr />                                 
+<hr />                                 
+<hr />                                 
                                  
