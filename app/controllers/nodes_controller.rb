@@ -10,7 +10,7 @@ class NodesController < ApplicationController
   end
 
   def show
-    key = params[ :key ].join( '/' )
+    key = params[ :key ]
     @node = Node.find_by_key( key )
     if @node
       render :layout => false
