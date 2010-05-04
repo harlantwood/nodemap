@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class NodesController < ApplicationController
 
   MAX_NODES_IN_LIST = 25
@@ -17,13 +19,17 @@ class NodesController < ApplicationController
     end
   end
 
-  def create
-    @node = Node.new(params[:node])
+  def create         
+    node_params = params[ :node ].dup           
+    key = Digest::SHA1.hexdigest( node_params[ :html ] ) 
+    ( redirect_to node_path( @node ) and return ) if @node = Node.find_by_key( key ) 
+    node_params.merge!( :key => key )
+    @node = Node.new( node_params )
     if @node.save
       redirect_to node_path( @node )
     else           
       @nodes = []
-      render :action => "new" 
+      render :home 
     end
   end
 
