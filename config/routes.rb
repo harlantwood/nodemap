@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.resources :nodes
   map.connect '',                    :controller => 'nodes', :action => 'home',   :conditions => { :method => :get  }
   map.connect '',                    :controller => 'nodes', :action => 'create', :conditions => { :method => :post }
-  map.node    ':key/*friendly_text', :controller => 'nodes', :action => 'show'
+  map.node    ':key/*friendly_text', :controller => 'nodes', :action => 'show', :key => /[0-9a-f]{40}/
 
   # The priority is based upon order of creation: first created -> highest priority.
 
