@@ -1,8 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
   # map.resources :nodes
-  map.connect '', :controller => 'nodes', :action => 'home',   :conditions => { :method => :get  }
-  map.connect '', :controller => 'nodes', :action => 'create', :conditions => { :method => :post }
-  map.node '*key', :controller => 'nodes', :action => 'show'
+  map.connect '',     :controller => 'nodes', :action => 'home',   :conditions => { :method => :get  }
+  map.connect '',     :controller => 'nodes', :action => 'create', :conditions => { :method => :post }
+  map.node    '*key', :controller => 'nodes', :action => 'show'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
