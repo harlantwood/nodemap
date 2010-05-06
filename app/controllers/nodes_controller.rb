@@ -4,7 +4,7 @@ class NodesController < ApplicationController
           
   protect_from_forgery :except => [ :create ]
 
-  MAX_NODES_IN_LIST = 25
+  MAX_NODES_IN_LIST = 999
 
   def home
     @nodes = Node.find( :all, :order => 'updated_at DESC', :limit => MAX_NODES_IN_LIST )
