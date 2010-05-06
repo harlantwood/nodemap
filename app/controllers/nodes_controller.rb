@@ -1,6 +1,8 @@
 require 'digest/sha1'
 
 class NodesController < ApplicationController
+          
+  protect_from_forgery :except => [ :create ]
 
   MAX_NODES_IN_LIST = 25
 
