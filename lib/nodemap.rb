@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 class NodeMap  
   def NodeMap.create_relationships
     Node.all.each do |node|

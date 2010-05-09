@@ -1,4 +1,3 @@
-require 'nokogiri'
 require 'digest/sha1'
 
 class Node < ActiveRecord::Base   
