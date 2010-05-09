@@ -1,5 +1,3 @@
-require 'digest/sha1'
-
 class NodesController < ApplicationController
           
   protect_from_forgery :except => [ :create ]
@@ -7,7 +5,7 @@ class NodesController < ApplicationController
   MAX_NODES_IN_LIST = 999
 
   def home
-    @nodes = Node.find( :all, :order => 'updated_at DESC', :limit => MAX_NODES_IN_LIST )
+    @nodes = Node.recent_with_title( MAX_NODES_IN_LIST )
     @node = Node.new
   end
 
@@ -22,11 +20,7 @@ class NodesController < ApplicationController
   end
 
   def create         
-    node_params = params[ :node ].dup           
-    key = Digest::SHA1.hexdigest( node_params[ :html ] ) 
-    ( redirect_to node_path( @node ) and return ) if @node = Node.find_by_key( key ) 
-    node_params.merge!( :key => key )
-    @node = Node.new( node_params )
+    @node = Node.custom_find_or_create( params[ :node ][ :html ] )
     if @node.save
       redirect_to node_path( @node )
     else           

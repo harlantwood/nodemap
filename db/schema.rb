@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20100508091134) do
   create_table "relationships", :force => true do |t|
     t.integer  "node_id"
     t.integer  "related_node_id"
+    t.integer  "content_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
