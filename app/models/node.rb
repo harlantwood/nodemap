@@ -22,8 +22,9 @@ class Node < ActiveRecord::Base
     Node.find_or_create_by_key( :key => key, :html => html )
   end
   
-  def initialize
-    raise 'please use Node.custom_find_or_create( ... )'
+  def initialize( params = nil )
+    raise "Unexpected params passed to Node.new: #{params.inspect} -- you may want Node.custom_find_or_create(...)" if params
+    super
   end
   
   def to_param
