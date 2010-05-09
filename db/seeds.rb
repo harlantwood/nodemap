@@ -9,4 +9,3 @@
 html = IO.read( File.join( Rails.root, *%w[ db seed_data accelerando.html ] ) )
 acc = Node.custom_find_or_create( html )
 
-NodeMap.create_relationships
