@@ -6,4 +6,8 @@ class Relationship < ActiveRecord::Base
   validates_presence_of :node
   validates_presence_of :related_node
   validates_presence_of :content
+  
+  def to_s
+    "#{node.key}[#{content.html}] = #{related_node.html}"
+  end
 end

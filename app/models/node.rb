@@ -71,7 +71,7 @@ class Node < ActiveRecord::Base
   def add_related_node( relationship_content, html )
     related_node = Node.custom_find_or_create( html )
     relationship_content_node = Node.custom_find_or_create( relationship_content )
-    Relationship.create!( :node => self, :related_node => related_node, :content => relationship_content_node )
+    puts Relationship.create!( :node => self, :related_node => related_node, :content => relationship_content_node )
   end
 
 end
