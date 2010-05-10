@@ -64,14 +64,14 @@ class Node < ActiveRecord::Base
   end
 
   def title                          
-    relationship = relationships.to_a.find{ |relationship| relationship.content.html == 'title' }   # note: finds the first one!  do something smarter.
+    relationship = relationships.to_a.find{ |relationship| relationship.predicate.html == 'title' }   # note: finds the first one!  do something smarter.
     relationship.related_node.html if relationship
   end
 
-  def add_related_node( relationship_content, html )
+  def add_related_node( relationship_predicate, html )
     related_node = Node.custom_find_or_create( html )
-    relationship_content_node = Node.custom_find_or_create( relationship_content )
-    puts Relationship.create!( :node => self, :related_node => related_node, :content => relationship_content_node )
+    relationship_predicate_node = Node.custom_find_or_create( relationship_predicate )
+    puts Relationship.create!( :node => self, :related_node => related_node, :predicate => relationship_predicate_node )
   end
 
 end
