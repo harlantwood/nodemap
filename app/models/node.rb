@@ -3,8 +3,7 @@ require 'nokogiri'
 
 class Node < ActiveRecord::Base   
 
-  has_many :relationships
-  has_many :related_nodes, :through => :relationships
+  has_many :relationships, :foreign_key => 'subject_id'
 
   validates_presence_of   :key
   validates_uniqueness_of :key
@@ -65,13 +64,13 @@ class Node < ActiveRecord::Base
 
   def title                          
     relationship = relationships.to_a.find{ |relationship| relationship.predicate.html == 'title' }   # note: finds the first one!  do something smarter.
-    relationship.related_node.html if relationship
+    relationship.object.html if relationship
   end
 
-  def add_related_node( relationship_predicate, html )
-    related_node = Node.custom_find_or_create( html )
-    relationship_predicate_node = Node.custom_find_or_create( relationship_predicate )
-    puts Relationship.create!( :node => self, :related_node => related_node, :predicate => relationship_predicate_node )
+  def add_related_node( predicate, object_content )
+    object_node = Node.custom_find_or_create( object_content )
+    predicate_node = Node.custom_find_or_create( predicate )
+    puts Relationship.create!( :subject => self, :predicate => predicate_node, :object => object_node )
   end
 
 end

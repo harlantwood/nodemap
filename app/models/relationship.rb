@@ -1,13 +1,13 @@
 class Relationship < ActiveRecord::Base
-  belongs_to :node
-  belongs_to :related_node, :class_name => 'Node'
-  belongs_to :predicate,    :class_name => 'Node'
+  belongs_to :subject,   :class_name => 'Node'
+  belongs_to :object,    :class_name => 'Node'
+  belongs_to :predicate, :class_name => 'Node'
   
-  validates_presence_of :node
-  validates_presence_of :related_node
+  validates_presence_of :subject
+  validates_presence_of :object
   validates_presence_of :predicate
   
   def to_s
-    "#{node.key}[#{predicate.html}] = #{related_node.html}"
+    "#{subject.key}[#{predicate.html}] = #{object.html}"
   end
 end

@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20100510062804) do
   end
 
   create_table "relationships", :force => true do |t|
-    t.integer  "node_id"
-    t.integer  "related_node_id"
+    t.integer  "subject_id"
+    t.integer  "object_id"
     t.integer  "predicate_id"
     t.datetime "created_at"
     t.datetime "updated_at"
