@@ -20,7 +20,7 @@ class NodesController < ApplicationController
   end
 
   def create         
-    @node = Node.custom_find_or_create( params[ :node ][ :html ] )
+    @node = Node.custom_find_or_create( params[ :node ][ :content ] )
     if @node.save
       redirect_to node_path( @node )
     else           

@@ -7,7 +7,7 @@ class Node < ActiveRecord::Base
 
   validates_presence_of   :key
   validates_uniqueness_of :key
-  validates_presence_of   :html
+  validates_presence_of   :content
 
   def Node.recent( max_nodes )
     Node.find( :all, :order => 'updated_at DESC', :limit => max_nodes )
@@ -17,18 +17,18 @@ class Node < ActiveRecord::Base
     Node.recent( max_nodes ).select( &:title )
   end
 
-  def Node.custom_find_or_create( html )
-    key = Digest::SHA1.hexdigest( html ) 
+  def Node.custom_find_or_create( content )
+    key = Digest::SHA1.hexdigest( content ) 
     node = Node.find_by_key( key ) 
     unless node
-      node = Node.create!( :key => key, :html => html )
+      node = Node.create!( :key => key, :content => content )
       node.create_relationships
     end
     node   
   end
 
   def initialize( params = nil )
-    if params.nil? or params.keys.map( &:to_s ).sort == %w[ html key ]
+    if params.nil? or params.keys.map( &:to_s ).sort == %w[ content key ]
       super( params )
     else
       raise "Unexpected params passed to Node.new: #{params.inspect} -- you may want Node.custom_find_or_create(...), or Node.new()" 
@@ -43,12 +43,12 @@ class Node < ActiveRecord::Base
     if title
       "#{title}"
     else
-      "[#{html}]"
+      "[#{content}]"
     end
   end
 
   def create_relationships
-    doc = Nokogiri::HTML( html )                
+    doc = Nokogiri::HTML( content )                
     %w[ div.title h1 ].each do |selector|
       if ( title_elements = doc.search( selector ) ).length == 1
         self.add_related_node( 'title', title_elements.first.content ) 
@@ -63,8 +63,8 @@ class Node < ActiveRecord::Base
   end
 
   def title                          
-    relationship = relationships.to_a.find{ |relationship| relationship.predicate.html == 'title' }   # note: finds the first one!  do something smarter.
-    relationship.object.html if relationship
+    relationship = relationships.to_a.find{ |relationship| relationship.predicate.content == 'title' }   # note: finds the first one!  do something smarter.
+    relationship.object.content if relationship
   end
 
   def add_related_node( predicate, object_content )
