@@ -9,11 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100510062804) do
+ActiveRecord::Schema.define(:version => 20100510075227) do
 
   create_table "nodes", :force => true do |t|
     t.string   "key"
-    t.text     "html"
+    t.text     "content",    :limit => 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
