@@ -40,13 +40,13 @@ class Node < ActiveRecord::Base
   end
 
   def to_s      
-    if title
-      "#{title}"
-    else
-      "[#{content}]"
-    end
+    plain_text? ? content : key
+  end         
+  
+  def plain_text?
+    ! content.match( %r{<html.+</html>}im )
   end
-
+  
   def create_relationships
     doc = Nokogiri::HTML( content )                
     %w[ div.title h1 ].each do |selector|

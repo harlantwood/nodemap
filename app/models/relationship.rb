@@ -8,6 +8,6 @@ class Relationship < ActiveRecord::Base
   validates_presence_of :predicate
   
   def to_s
-    "#{subject.key}[#{predicate.content}] = #{object.content}"
+    "#{subject} #{predicate} #{object}"
   end
 end
