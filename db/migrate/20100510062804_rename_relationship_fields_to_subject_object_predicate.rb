@@ -6,5 +6,8 @@ class RenameRelationshipFieldsToSubjectObjectPredicate < ActiveRecord::Migration
   end
 
   def self.down
+    rename_column(:relationships, :subject_id,   :node_id)
+    rename_column(:relationships, :predicate_id, :content_id)
+    rename_column(:relationships, :object_id,    :related_node_id)
   end
 end
