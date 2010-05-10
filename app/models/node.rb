@@ -50,8 +50,11 @@ class Node < ActiveRecord::Base
 
   def create_relationships
     doc = Nokogiri::HTML( html )                
-    doc.search( 'h1' ).each do |h1_tag| 
-      self.add_related_node( 'title', h1_tag.content ) 
+    %w[ div.title h1 ].each do |selector|
+      if ( title_elements = doc.search( selector ) ).length == 1
+        self.add_related_node( 'title', title_elements.first.content ) 
+        break
+      end
     end
 
     # ::: Wikipedia categories :::
