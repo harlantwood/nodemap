@@ -2,7 +2,7 @@ class NodesController < ApplicationController
           
   protect_from_forgery :except => [ :create ]
 
-  MAX_NODES_IN_LIST = 999
+  MAX_NODES_IN_LIST = 333
 
   def home
     @nodes = Node.recent_with_title( MAX_NODES_IN_LIST )
