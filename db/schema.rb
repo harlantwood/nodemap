@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(:version => 20100502075408) do
 
   create_table "nodes", :force => true do |t|
     t.string   "key"
-    t.text     "content",    :limit => 16777215
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
