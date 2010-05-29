@@ -40,7 +40,7 @@
 <h2>Recent Nodes:</h2>
                                  
 <% @nodes.each do |node| %>
-  <div><%= link_to node.to_s, node %></div>
+  <div><%= link_to node.key, node %></div>
 <% end %>
                                  
 <br />                                 
