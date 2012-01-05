@@ -21,7 +21,7 @@ require 'run_cmd'
     task :push do
       target = ENV['TARGET'] || raise( 'please pass in TARGET')
       raise 'Refusing to push db to production' if target=='prod' || target=='production'
-      run "heroku rake db:reset --app #{app}-#{target}"
+      run "heroku run rake db:reset --app #{app}-#{target}"
       run "heroku db:push --app #{app}-#{target} --confirm #{app}-#{target}"
     end
 
@@ -30,9 +30,9 @@ require 'run_cmd'
       ref = ENV['REF'] || 'master'
       target = ENV['TARGET'] || TARGETS.first
       deploy( target, ref )
-      run( "heroku rake --trace db:migrate                 --app #{app}-#{target}" )
+      run( "heroku run rake --trace db:migrate                 --app #{app}-#{target}" )
       run( "heroku restart                                 --app #{app}-#{target}" )
-      run( "heroku rake --trace db:seed                    --app #{app}-#{target}" )
+      run( "heroku run rake --trace db:seed                    --app #{app}-#{target}" )
     end
 
     def deploy( target, ref )
