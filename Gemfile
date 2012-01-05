@@ -6,8 +6,6 @@ gem 'awesome_print'
 gem 'hoptoad_notifier'
 gem 'jquery-rails'
 gem 'nokogiri'
-gem 'mysql'
-gem 'sqlite3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,6 +18,11 @@ end
 group :development do
   gem 'heroku'
   gem 'taps'
+  gem 'sqlite3'
+end
+
+group :procution do
+  gem 'pg'
 end
 
 # To use ActiveModel has_secure_password
