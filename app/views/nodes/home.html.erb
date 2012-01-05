@@ -1,8 +1,7 @@
 <br />                                 
 <h2>Enter HTML to create new node:</h2>
 
-<% form_for(@node, :url => { :action => "create" }) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@node, :url => { :action => "create" }) do |f| %>
   <div>
     <%= f.text_area :content, :cols => 100 %>
   </div>
