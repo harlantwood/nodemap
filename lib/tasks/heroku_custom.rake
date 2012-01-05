@@ -25,7 +25,7 @@ namespace :heroku do
 
   desc "Deploy from REF=<ref> TARGET=<#{TARGETS.join('|')}>"
   task :deploy => :environment do
-    ref = ENV['REF'] || 'master'
+    ref = ENV['REF'] || 'HEAD'
     target = ENV['TARGET'] || TARGETS.first
     deploy( target, ref )
     run( "heroku run:rake --trace db:migrate                 --app #{app}-#{target}" )
@@ -41,7 +41,7 @@ namespace :heroku do
     end
 
     # deploy release branch: always *to* heroku "master" branch
-    run( "git push --force #{git_remote} #{ref}:HEAD" )
+    run( "git push --force #{git_remote} #{ref}:master" )
   end
 
   desc 'make new app instance on heroku using TARGET=<eg static1>'
