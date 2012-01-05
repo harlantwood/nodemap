@@ -6,4 +6,4 @@ development: &DEVELOPMENT
 
 test:
   <<: *DEVELOPMENT
-  database: nodemap_test
+  database: db/test.sqlite3
