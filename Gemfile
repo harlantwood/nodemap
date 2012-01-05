@@ -2,11 +2,12 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
+gem 'awesome_print'
+gem 'hoptoad_notifier'
+gem 'jquery-rails'
+gem 'nokogiri'
+gem 'mysql'
 gem 'sqlite3'
-
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -16,16 +17,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'awesome_print'
-gem 'hoptoad_notifier'
-gem 'jquery-rails'
-gem 'nokogiri'
-gem 'mysql'
-
 group :development do
   gem 'heroku'
   gem 'taps'
-  gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
 # To use ActiveModel has_secure_password
