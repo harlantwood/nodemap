@@ -22,7 +22,9 @@ group :development do
 end
 
 group :procution do
+  gem 'execjs'
   gem 'pg'
+  gem 'therubyracer'
 end
 
 # To use ActiveModel has_secure_password
