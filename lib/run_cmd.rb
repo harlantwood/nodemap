@@ -1,5 +1,5 @@
-module Shell
-  def execute( cmd, options = {} )
+module RunCmd
+  def run( cmd, options = {} )
     defaults = {
       :quiet => false,
       :confirm_first => false,         
@@ -10,7 +10,7 @@ module Shell
     options = defaults.merge( options )
     cmd.gsub!( /\s+/, ' ' )
     cmd.strip!
-    puts "=> Running #{cmd.inspect}\n"
+    puts "=> Running #{cmd.inspect}\n" unless options[ :quiet ]
     if options[ :confirm_first ]
       STDOUT << "Execute [Yn]? "
       response = STDIN.gets.chomp
@@ -37,3 +37,5 @@ module Shell
     end
   end                                             
 end
+
+include RunCmd
