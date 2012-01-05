@@ -19,15 +19,7 @@ class Node < ActiveRecord::Base
     unless node
       node = Node.create!( :key => key, :content => content )
     end
-    node   
-  end
-
-  def initialize( params = nil )
-    if params.nil? or params.keys.map( &:to_s ).sort == %w[ content key ]
-      super( params )
-    else
-      raise "Unexpected params passed to Node.new: #{params.inspect} -- you may want Node.custom_find_or_create(...), or Node.new()" 
-    end
+    node
   end
 
   def to_param
