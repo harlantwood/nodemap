@@ -1,7 +1,4 @@
-require 'digest/sha1'
-require 'nokogiri'
-
-class Node < ActiveRecord::Base   
+class Node < ActiveRecord::Base
 
   has_many :relationships, :foreign_key => 'subject_id'
 
@@ -14,11 +11,11 @@ class Node < ActiveRecord::Base
   end
 
   def Node.custom_find_or_create( content )
-    key = Digest::SHA1.hexdigest( content ) 
+    key = content.sha512
     node = Node.find_by_key( key ) 
-    unless node
-      node = Node.create!( :key => key, :content => content )
-    end
+    node = Node.create!( :key => key, :content => content ) unless node
+    node.reload
+    raise "Correct key is #{key}, but was stored as #{node.key}" unless node.key == key
     node
   end
 
