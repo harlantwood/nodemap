@@ -1,6 +1,6 @@
 class NodesController < ApplicationController
-          
-  protect_from_forgery :except => [ :create ]
+
+  skip_before_filter :verify_authenticity_token, :only => :create
 
   MAX_NODES_IN_LIST = 333
 
