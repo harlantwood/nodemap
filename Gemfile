@@ -21,7 +21,7 @@ group :development do
   gem 'sqlite3'
 end
 
-group :procution do
+group :production do
   gem 'execjs'
   gem 'pg'
   gem 'therubyracer'
@@ -39,7 +39,3 @@ end
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test do
-  # Pretty printed test output
-  gem 'turn', '0.8.2', :require => false
-end
