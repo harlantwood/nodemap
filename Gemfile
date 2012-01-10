@@ -13,14 +13,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
-  gem 'heroku'
-  gem 'taps'
-  gem 'sqlite3'
-end
-
 group :production do
   gem 'execjs'
-  gem 'pg'
   gem 'therubyrhino'
 end
