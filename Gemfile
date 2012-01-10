@@ -22,5 +22,5 @@ end
 group :production do
   gem 'execjs'
   gem 'pg'
-  gem 'therubyracer'
+  gem 'therubyrhino'
 end
