@@ -1,22 +1,31 @@
-class Node < ActiveRecord::Base
+require 'java'
+import org.baseparadigm.RepoFs
 
-  has_many :relationships, :foreign_key => 'subject_id'
+class HexNamer
 
-  validates_presence_of   :key
-  validates_uniqueness_of :key
-  validates_presence_of   :content
+  include RepoFs::Namer
+
+  # accepts a java byte array. returns a string file name
+  def name(cid)
+    new BigInteger(cid).toString(16)
+  end
+
+  #accepts a string file name, returns a byte array
+  def reverse(cid)
+    new BigInteger(cid, 16).toByteArray()
+  end
+end
+
+class Node
+
+  @@base_paradigm = RepoFs.new(HexNamer.new)
 
   def Node.recent( max_nodes )
-    Node.find( :all, :order => 'updated_at DESC', :limit => max_nodes )
+    raise 'implement me'
   end
 
   def Node.custom_find_or_create( content )
-    key = content.sha512
-    node = Node.find_by_key( key ) 
-    node = Node.create!( :key => key, :content => content ) unless node
-    node.reload
-    raise "Correct key is #{key}, but was stored as #{node.key}" unless node.key == key
-    node
+    @@base_paradigm.put( content )
   end
 
   def to_param
