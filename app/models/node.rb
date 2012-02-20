@@ -30,7 +30,7 @@ class Node
   end
 
   def self.find_by_key( content_id_string )
-    ContentId.new(@@repo_fs, BigInteger.new(content_id_string, 16)).resolve()
+    java.lang.String.new(ContentId.new(@@repo_fs, BigInteger.new(content_id_string, 16)).resolve(), 'UTF-8')
   end
 
 end
