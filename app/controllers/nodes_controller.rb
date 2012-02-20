@@ -5,14 +5,15 @@ class NodesController < ApplicationController
   MAX_NODES_IN_LIST = 333
 
   def home
-    @nodes = Node.recent( MAX_NODES_IN_LIST )
+    #@nodes = Node.recent( MAX_NODES_IN_LIST )
+
     @node = Node.new
   end
 
   def show
     key = params[ :key ]
-    @node = Node.find_by_key( key )
-    if @node
+    @content = Node.find_by_key( key )
+    if @content
       render :layout => false
     else
       render :text => "Can't find the key: #{ key }", :status => '404 Not Found'
@@ -20,13 +21,8 @@ class NodesController < ApplicationController
   end
 
   def create         
-    @node = Node.custom_find_or_create( params[ :node ][ :content ] )
-    if @node.save
-      redirect_to node_path( @node )
-    else           
-      @nodes = []
-      render :home 
-    end
+    @content_id = Node.custom_find_or_create( params[ :node ][ :content ] )
+    redirect_to "/#{@content_id.toString(16)}"
   end
 
 end

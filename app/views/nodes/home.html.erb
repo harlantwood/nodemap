@@ -1,9 +1,9 @@
 <br />                                 
 <h2>Enter content to create new node:</h2>
 
-<%= form_for(@node, :url => { :action => "create" }) do |f| %>
+<form accept-charset="UTF-8" action="/" class="new_node" id="new_node" method="post">
   <div>
-    <%= f.text_area :content, :cols => 100 %>
+    <textarea cols="100" id="node_content" name="node[content]" rows="20"></textarea>
   </div>
   <div rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">      
     <table style="margin: 0em; padding: 0em; font-size: 90%; text-align: left">
@@ -27,9 +27,9 @@
     </table>
   </div>
   <div>
-    <%= f.submit 'Yes! Create This Free IP!' %>
+    <%= submit_tag 'Yes! Create This Free IP!' %>
   </div>
-<% end %>
+</form>
                                  
 <br />                                 
 <hr />                                 
@@ -38,9 +38,9 @@
                                  
 <h2>Recent Nodes:</h2>
                                  
-<% @nodes.each do |node| %>
-  <div><%= link_to node.key, node %></div>
-<% end %>
+<%# @nodes.each do |node| %>
+  <div><%#= link_to node.key, node %></div>
+<%# end %>
                                  
 <br />                                 
 <hr />                                 
